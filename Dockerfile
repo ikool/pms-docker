@@ -29,9 +29,16 @@ RUN \
     mkdir -p \
       /config \
       /transcode \
-      /data \
-    && \
+      /data 
+#   && \
 
+# Add Cigaras-IPTV Bundle
+
+ADD ["https://github.com/Cigaras/IPTV.bundle/archive/master.tar.gz","/config/Library/Application Support/Plex Media Server/Plug-ins/" ]
+RUN \
+	tar xvf /config/Library/Application\ Support/Plex\ Media\ Server/Plug-ins/master.tar.gz -C /config/Library/Application\ Support/Plex\ Media\ Server/Plug-ins && \
+	mv /config/Library/Application\ Support/Plex\ Media\ Server/Plug-ins/IPTV.bundle-master /config/Library/Application\ Support/Plex\ Media\ Server/Plug-ins/IPTV.bundle && \
+	
 # Cleanup
     apt-get -y autoremove && \
     apt-get -y clean && \
